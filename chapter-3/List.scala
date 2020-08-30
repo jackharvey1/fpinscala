@@ -40,6 +40,12 @@ object List {
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
+  def init[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case Cons(_, Nil) => Nil 
+    case Cons(h, t) => Cons(h, init(t))
+  }
+
   def main(args: Array[String]): Unit = {
     val x: List[Int] = Cons(1,Cons(2,Cons(3, Nil)))
     println(drop(x, 1))
