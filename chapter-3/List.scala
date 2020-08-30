@@ -19,6 +19,11 @@ object List {
     case Cons(_, t) => t
   }
 
+  def setHead[A](h: A, l: List[A]): List[A] = l match {
+    case Nil => sys.error("setHead of empty list")
+    case Cons(_, t) => Cons(h, t)
+  }
+
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
