@@ -19,6 +19,13 @@ object List {
     case Cons(_, t) => t
   }
 
+  def drop[A](l: List[A], n: Int): List[A] = 
+    if (n <= 0) l
+    else l match {
+      case Nil => Nil
+      case Cons(_, t) => drop(t, n - 1)
+    }
+
   def setHead[A](h: A, l: List[A]): List[A] = l match {
     case Nil => sys.error("setHead of empty list")
     case Cons(_, t) => Cons(h, t)
@@ -29,6 +36,7 @@ object List {
     else Cons(as.head, apply(as.tail: _*))
 
   def main(args: Array[String]): Unit = {
-    println(List(1, 2, 3).toString())
+    val x: List[Int] = Cons(1,Cons(2,Cons(3, Nil)))
+    println(drop(x, 1))
   }
 }
