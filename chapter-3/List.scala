@@ -26,6 +26,11 @@ object List {
       case Cons(_, t) => drop(t, n - 1)
     }
 
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Cons(h, t) if f(h) => dropWhile(t, f)
+    case _ => l
+  }
+
   def setHead[A](h: A, l: List[A]): List[A] = l match {
     case Nil => sys.error("setHead of empty list")
     case Cons(_, t) => Cons(h, t)
