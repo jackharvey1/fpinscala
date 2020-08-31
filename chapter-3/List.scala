@@ -58,8 +58,11 @@ object List {
   def product2(ns: List[Double]) =
     foldRight(ns, 1.0)(_ * _)
 
+  def length[A](as: List[A]): Int =
+    foldRight(as, 0)((_, accumulator) => accumulator + 1)
+
   def main(args: Array[String]): Unit = {
     val x: List[Int] = Cons(1,Cons(2,Cons(3, Nil)))
-    println(drop(x, 1))
+    println(length(x))
   }
 }
