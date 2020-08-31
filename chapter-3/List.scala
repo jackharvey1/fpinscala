@@ -67,9 +67,19 @@ object List {
   def length[A](as: List[A]): Int =
     foldRight(as, 0)((_, accumulator) => accumulator + 1)
 
+  def sum3(ns: List[Int]) =
+    foldLeft(ns, 0)(_ + _)
+
+  def product3(ns: List[Int]) =
+    foldLeft(ns, 1.0)(_ * _)
+
+  def length3[A](as: List[A]): Int =
+    foldLeft(as, 0)((accumulator, _) => accumulator + 1)
+
   def main(args: Array[String]): Unit = {
     val x: List[Int] = Cons(1,Cons(2,Cons(3, Nil)))
-    println(foldRight(x, 1.0)(_ * _))
-    println(foldLeft(x, 1.0)(_ * _))
+    println(sum3(x))
+    println(product3(x))
+    println(length3(x))
   }
 }
