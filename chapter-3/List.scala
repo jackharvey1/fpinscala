@@ -82,9 +82,14 @@ object List {
   def append[A](as: List[A], bs: List[A]): List[A] =
     foldRight(as, bs)(Cons(_, _))
 
+  def concat[A](as: List[List[A]]): List[A] =
+    foldRight(as, Nil: List[A])(append)
+
   def main(args: Array[String]): Unit = {
     val x: List[Int] = Cons(1, Cons(2, Cons(3, Nil)))
     val y: List[Int] = Cons(4, Cons(5, Nil))
-    println(append(x, y))
+    val z: List[List[Int]] = Cons(y, Cons(x, Nil))
+    println(z)
+    println(concat(z))
   }
 }
