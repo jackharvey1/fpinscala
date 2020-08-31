@@ -76,10 +76,11 @@ object List {
   def length3[A](as: List[A]): Int =
     foldLeft(as, 0)((accumulator, _) => accumulator + 1)
 
+  def reverse[A](as: List[A]): List[A] = 
+    foldLeft(as, Nil: List[A])((accumulator: List[A], next: A) => Cons(next, accumulator))
+
   def main(args: Array[String]): Unit = {
-    val x: List[Int] = Cons(1,Cons(2,Cons(3, Nil)))
-    println(sum3(x))
-    println(product3(x))
-    println(length3(x))
+    val x: List[Int] = Cons(1, Cons(2, Cons(3, Nil)))
+    println(reverse(x))
   }
 }
