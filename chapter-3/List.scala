@@ -79,8 +79,12 @@ object List {
   def reverse[A](as: List[A]): List[A] = 
     foldLeft(as, Nil: List[A])((accumulator: List[A], next: A) => Cons(next, accumulator))
 
+  def append[A](as: List[A], bs: List[A]): List[A] =
+    foldRight(as, bs)(Cons(_, _))
+
   def main(args: Array[String]): Unit = {
     val x: List[Int] = Cons(1, Cons(2, Cons(3, Nil)))
-    println(reverse(x))
+    val y: List[Int] = Cons(4, Cons(5, Nil))
+    println(append(x, y))
   }
 }
