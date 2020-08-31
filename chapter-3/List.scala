@@ -52,6 +52,12 @@ object List {
       case Cons(x, xs) => f(x, foldRight(xs, z)(f))
     }
 
+  @annotation.tailrec
+  def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+  }
+
   def sum2(ns: List[Int]) =
     foldRight(ns, 0)((x,y) => x + y)
 
@@ -63,6 +69,7 @@ object List {
 
   def main(args: Array[String]): Unit = {
     val x: List[Int] = Cons(1,Cons(2,Cons(3, Nil)))
-    println(length(x))
+    println(foldRight(x, 1.0)(_ * _))
+    println(foldLeft(x, 1.0)(_ * _))
   }
 }
