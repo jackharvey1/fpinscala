@@ -91,8 +91,11 @@ object List {
   def stringifyDoubles(ns: List[Double]): List[String] =
     foldRight(ns, Nil: List[String])((next: Double, accumulator: List[String]) => Cons(next.toString, accumulator))
 
+  def map[A,B](as: List[A])(f: A => B): List[B] = 
+    foldRight(as, Nil: List[B])((h, t) => Cons(f(h), t))
+
   def main(args: Array[String]): Unit = {
     val x: List[Double] = Cons(1.3, Cons(0.8, Cons(7.5, Nil)))
-    println(stringifyDoubles(x))
+    println(map(x)(_ * 3))
   }
 }
