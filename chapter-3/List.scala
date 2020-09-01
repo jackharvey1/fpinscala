@@ -94,8 +94,11 @@ object List {
   def map[A,B](as: List[A])(f: A => B): List[B] = 
     foldRight(as, Nil: List[B])((h, t) => Cons(f(h), t))
 
+  def filter[A](as: List[A])(f: A => Boolean): List[A] =
+    foldRight(as, Nil: List[A])((h, t) => if (f(h)) Cons(h, t) else t) 
+
   def main(args: Array[String]): Unit = {
     val x: List[Double] = Cons(1.3, Cons(0.8, Cons(7.5, Nil)))
-    println(map(x)(_ * 3))
+    println(filter(x)(_ < 3))
   }
 }
