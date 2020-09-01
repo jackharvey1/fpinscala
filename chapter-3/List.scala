@@ -88,10 +88,11 @@ object List {
   def addOne[A](ns: List[Int]): List[Int] = 
     foldRight(ns, Nil: List[Int])((next: Int, accumulator: List[Int]) => Cons(next + 1, accumulator))
 
+  def stringifyDoubles(ns: List[Double]): List[String] =
+    foldRight(ns, Nil: List[String])((next: Double, accumulator: List[String]) => Cons(next.toString, accumulator))
+
   def main(args: Array[String]): Unit = {
-    val x: List[Int] = Cons(1, Cons(2, Cons(3, Nil)))
-    val y: List[Int] = Cons(4, Cons(5, Nil))
-    val z: List[List[Int]] = Cons(y, Cons(x, Nil))
-    println(addOne(x))
+    val x: List[Double] = Cons(1.3, Cons(0.8, Cons(7.5, Nil)))
+    println(stringifyDoubles(x))
   }
 }
