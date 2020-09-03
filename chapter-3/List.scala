@@ -97,6 +97,9 @@ object List {
   def filter[A](as: List[A])(f: A => Boolean): List[A] =
     foldRight(as, Nil: List[A])((h, t) => if (f(h)) Cons(h, t) else t) 
 
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] =
+    concat(map(as)(f))
+
   def main(args: Array[String]): Unit = {
     val x: List[Double] = Cons(1.3, Cons(0.8, Cons(7.5, Nil)))
     println(filter(x)(_ < 3))
