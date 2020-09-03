@@ -103,8 +103,15 @@ object List {
   def filter2[A](as: List[A])(f: A => Boolean): List[A] =
     flatMap(as)(a => if (f(a)) Cons(a, Nil) else Nil)
 
+  def addPairwise(ns: List[Int], ms: List[Int]): List[Int] = (ns, ms) match {
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+    case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1 + h2, addPairwise(t1, t2))
+  }
+
   def main(args: Array[String]): Unit = {
-    val x: List[Double] = Cons(1.3, Cons(0.8, Cons(7.5, Nil)))
-    println(filter2(x)(_ < 3))
+    val x: List[Int] = Cons(1, Cons(0, Cons(7, Nil)))
+    val y: List[Int] = Cons(7, Cons(2, Cons(9, Cons(3, Nil))))
+    println(addPairwise(x, y))
   }
 }
