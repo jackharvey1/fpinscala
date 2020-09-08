@@ -18,9 +18,14 @@ object Tree {
     case Leaf(x) => 1
   }
 
+  def map[A,B](tree: Tree[A])(f: A => B): Tree[B] = tree match {
+    case Branch(l, r) => Branch(map(l)(f), map(r)(f))
+    case Leaf(x) => Leaf(f(x))
+  }
+
   def main(args: Array[String]): Unit = {
     println(
-      depth(
+      map(
         Branch(
           Branch(
             Leaf(9), 
@@ -34,7 +39,7 @@ object Tree {
             Leaf(4)
           )
         )
-      )
+      )(_ * 2)
     )
   }
 }
