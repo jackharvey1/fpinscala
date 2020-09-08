@@ -8,9 +8,28 @@ object Tree {
     case Leaf(_) => 1
   }
 
+  def maximum(tree: Tree[Int]): Int = tree match {
+    case Branch(l, r) => maximum(l) max maximum(r)
+    case Leaf(x) => x
+  }
+
   def main(args: Array[String]): Unit = {
-    println(size(Branch(Leaf(2), Leaf(3))), 3)
-    println(size(Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))), 5)
-    println(size(Branch(Leaf(3), Branch(Leaf(1), Leaf(2)))), 5)
+    println(
+      maximum(
+        Branch(
+          Branch(
+            Leaf(9), 
+            Branch(
+              Leaf(11),
+              Leaf(65) // 65 maximum
+            ), 
+          ),
+          Branch(
+            Leaf(2), 
+            Leaf(4)
+          )
+        )
+      )
+    )
   }
 }
