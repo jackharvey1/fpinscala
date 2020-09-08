@@ -13,15 +13,20 @@ object Tree {
     case Leaf(x) => x
   }
 
+  def depth[A](tree: Tree[A]): Int = tree match {
+    case Branch(l, r) => 1 + (depth(l) max depth(r))
+    case Leaf(x) => 1
+  }
+
   def main(args: Array[String]): Unit = {
     println(
-      maximum(
+      depth(
         Branch(
           Branch(
             Leaf(9), 
             Branch(
               Leaf(11),
-              Leaf(65) // 65 maximum
+              Leaf(65) // 4 depth
             ), 
           ),
           Branch(
