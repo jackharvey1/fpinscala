@@ -23,4 +23,9 @@ trait Option[+A] {
     case Some(a) if f(a) => this
     case _ => None
   }
+
+  def variance(xs: Seq[Double]): Option[Double] = {
+    mean(xs) flatMap (m => mean(xs.map(x => math.pow(x - m, 2))))
+  }
 }
+
